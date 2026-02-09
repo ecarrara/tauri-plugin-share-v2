@@ -35,7 +35,10 @@ impl<R: Runtime, T: Manager<R>> crate::ShareExt<R> for T {
 /// Initializes the plugin.
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
     Builder::new("share")
-        .invoke_handler(tauri::generate_handler![])
+        .invoke_handler(tauri::generate_handler![
+            commands::share,
+            commands::can_share
+        ])
         .setup(|app, api| {
             #[cfg(mobile)]
             let share = mobile::init(app, api)?;

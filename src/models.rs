@@ -11,3 +11,10 @@ pub struct ShareRequest {
     /// Text content to share.
     pub text: Option<String>,
 }
+
+/// Response from canShare command.
+#[derive(Debug, Clone, Default, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CanShareResponse {
+    pub value: bool,
+}

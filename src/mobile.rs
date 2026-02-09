@@ -4,6 +4,8 @@ use tauri::{
     AppHandle, Runtime,
 };
 
+use crate::models::*;
+
 #[cfg(target_os = "ios")]
 tauri::ios_plugin_binding!(init_plugin_share);
 
@@ -22,5 +24,18 @@ pub fn init<R: Runtime, C: DeserializeOwned>(
 pub struct Share<R: Runtime>(PluginHandle<R>);
 
 impl<R: Runtime> Share<R> {
-    // Share methods will be implemented in ENG-131
+    /// Share content using the native share sheet.
+    pub fn share(&self, request: ShareRequest) -> crate::Result<()> {
+        self.0
+            .run_mobile_plugin("share", request)
+            .map_err(Into::into)
+    }
+
+    /// Check if sharing is available on this platform.
+    pub fn can_share(&self) -> crate::Result<bool> {
+        self.0
+            .run_mobile_plugin::<CanShareResponse>("canShare", ())
+            .map(|r| r.value)
+            .map_err(Into::into)
+    }
 }
