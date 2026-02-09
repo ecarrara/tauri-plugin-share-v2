@@ -14,15 +14,13 @@ pub fn init<R: Runtime, C: DeserializeOwned>(
 pub struct Share<R: Runtime>(AppHandle<R>);
 
 impl<R: Runtime> Share<R> {
-    /// Share content (desktop fallback - will copy to clipboard in ENG-134).
+    /// Share content - not available on desktop.
     pub fn share(&self, _request: ShareRequest) -> crate::Result<()> {
-        // TODO: Implement clipboard fallback in ENG-134
-        Ok(())
+        Err(crate::Error::NotAvailableOnDesktop)
     }
 
     /// Check if sharing is available on this platform.
     pub fn can_share(&self) -> crate::Result<bool> {
-        // Desktop always returns true (clipboard fallback available)
-        Ok(true)
+        Ok(false)
     }
 }
