@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share Plugin Test</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #1a1a2e;
+      color: #eee;
+    }
+    button {
+      font-size: 1.2rem;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      background: #4f46e5;
+      color: white;
+      cursor: pointer;
+    }
+    button:active {
+      background: #4338ca;
+    }
+    #status {
+      margin-top: 1rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔗 Share Plugin Test</h1>
+  <button id="share-btn">Share Something</button>
+  <p id="status"></p>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
