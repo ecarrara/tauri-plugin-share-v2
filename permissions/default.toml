@@ -12,5 +12,5 @@ if sharing is available on the current platform.
 
 permissions = [
   "allow-share",
-  "allow-can_share",
+  "allow-can-share",
 ]
