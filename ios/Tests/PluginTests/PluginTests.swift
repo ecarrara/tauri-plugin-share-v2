@@ -1,8 +1,9 @@
 import XCTest
-@testable import ExamplePlugin
+@testable import tauri_plugin_share
 
-final class ExamplePluginTests: XCTestCase {
-    func testExample() throws {
-        let plugin = ExamplePlugin()
+final class SharePluginTests: XCTestCase {
+    func testPluginInitialization() throws {
+        let plugin = SharePlugin()
+        XCTAssertNotNil(plugin)
     }
 }

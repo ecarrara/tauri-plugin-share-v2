@@ -9,16 +9,13 @@ import org.junit.runner.RunWith
 import org.junit.Assert.*
 
 /**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
+ * Instrumented test for SharePlugin.
  */
 @RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
+class SharePluginInstrumentedTest {
     @Test
     fun useAppContext() {
-        // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.plugin.share", appContext.packageName)
+        assertEquals("com.plugin.share.test", appContext.packageName)
     }
 }
