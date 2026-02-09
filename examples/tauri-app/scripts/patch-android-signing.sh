@@ -3,11 +3,18 @@
 
 GRADLE_FILE="src-tauri/gen/android/app/build.gradle.kts"
 
-# Add import at the top
-sed -i '1s/^/import java.io.FileInputStream\nimport java.util.Properties\n\n/' "$GRADLE_FILE"
+# Add imports only if they don't already exist
+if ! grep -q "import java.io.FileInputStream" "$GRADLE_FILE"; then
+    sed -i '1s/^/import java.io.FileInputStream\n/' "$GRADLE_FILE"
+fi
 
-# Add signing config before buildTypes
-sed -i '/^android {/a\
+if ! grep -q "import java.util.Properties" "$GRADLE_FILE"; then
+    sed -i '1s/^/import java.util.Properties\n/' "$GRADLE_FILE"
+fi
+
+# Add signing config before buildTypes (only if not already added)
+if ! grep -q "signingConfigs" "$GRADLE_FILE"; then
+    sed -i '/^android {/a\
     signingConfigs {\
         create("release") {\
             val keystorePropertiesFile = rootProject.file("keystore.properties")\
@@ -21,8 +28,11 @@ sed -i '/^android {/a\
             storePassword = keystoreProperties["password"] as String?\
         }\
     }' "$GRADLE_FILE"
+fi
 
-# Update release buildType to use signing config
-sed -i 's/getByName("release") {/getByName("release") {\n            signingConfig = signingConfigs.getByName("release")/' "$GRADLE_FILE"
+# Update release buildType to use signing config (only if not already done)
+if ! grep -q 'signingConfig = signingConfigs.getByName("release")' "$GRADLE_FILE"; then
+    sed -i 's/getByName("release") {/getByName("release") {\n            signingConfig = signingConfigs.getByName("release")/' "$GRADLE_FILE"
+fi
 
 echo "Android signing patched successfully"
