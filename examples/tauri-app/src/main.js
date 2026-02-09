@@ -1,4 +1,4 @@
-import { share, canShare } from 'tauri-plugin-share-api';
+import { share, canShare } from '../../../dist-js/index.js';
 
 const btn = document.getElementById('share-btn');
 const status = document.getElementById('status');
